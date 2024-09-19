@@ -30,5 +30,5 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 1. Clone the repository:
 
    ```bash
-https://github.com/shivendersingh/SeleniumHybrideFramework.git
+ git clone https://github.com/shivendersingh/SeleniumHybrideFramework.git
   
