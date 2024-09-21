@@ -1,28 +1,20 @@
 package com.qa.opencart.factory;
 
 import java.io.FileInputStream;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import dev.failsafe.internal.util.RandomDelay;
-
-import java.util.Random;
+import com.qa.opencart.wbedriverfactory.WebDriverFactory;
 
 public class DriverFactory {
 	WebDriver driver;
 	Properties prop;
-
 	/**
 	 * here we author provide to intitate the wedriver
 	 * 
@@ -30,10 +22,13 @@ public class DriverFactory {
 	 * @return driver
 	 */
 	public WebDriver init_driver(Properties prop) {
+		
 		String browsername= prop.getProperty("browsername");  
 		System.out.println("browser name is: " + browsername);
-
+		driver = WebDriverFactory.getDriver();
+		
 		if (browsername.equalsIgnoreCase("chrome")) {
+			driver = WebDriverFactory.getDriver();
 			driver = new ChromeDriver();
 		} else if (browsername.equalsIgnoreCase("firefox")) {
 			driver = new FirefoxDriver();
