@@ -15,6 +15,46 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 - ** GeneicUtils
 - ** Report(Allure,Extent)
 - ** Infrastrcture Setup
+- **Surefire Plugin capabilities enable for regression suite run on different "env" bases
+
+<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.20</version>
+
+				<configuration>
+					<forkCount>3</forkCount>
+					<reuseForks>true</reuseForks>
+					<suiteXmlFiles>
+						<suiteXmlFile>
+							<add your runner suite path></suiteXmlFile>
+						<!-- <suiteXmlFile>${suiteXmlFile}</suiteXmlFile> -->
+					</suiteXmlFiles>
+
+
+				</configuration>
+
+			</plugin>
+
+		</plugins>
+
+
+	</build>
+##Command to run the suite through maven
+>>mvn clean install
+>>mvn clean install -Denv="<provide your desire environment>"
 
 ## Getting Started
 
@@ -29,6 +69,5 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 
 1. Clone the repository:
 
-   ```bash
- git clone https://github.com/shivendersingh/SeleniumHybrideFramework.git
+  git clone https://github.com/shivendersingh/SeleniumHybrideFramework.git
   
