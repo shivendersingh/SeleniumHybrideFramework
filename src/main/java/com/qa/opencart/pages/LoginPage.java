@@ -16,7 +16,7 @@ public class LoginPage {
 	private By password = By.id("input-password");
 	private By loginbutton = By.xpath("//input[@value='Login']");
 	private By forgotpwd = By.xpath("//div[@class='form-group']//a[normalize-space()='Forgotten Password']");
-
+	private By registerlink = By.linkText("Register");
 //Constructor
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
@@ -38,7 +38,9 @@ public class LoginPage {
 		elementutil.sendkey(password, Pwd);
 		elementutil.click(loginbutton);
 		return new AccountPage(driver);
-	
-
+	}
+	public  AccountRegistration navigationToregistrationpage() {
+		driver.findElement(registerlink).click();
+		return new AccountRegistration(driver);
 	}
 }

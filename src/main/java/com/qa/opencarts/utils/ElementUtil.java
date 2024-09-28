@@ -11,13 +11,32 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.qa.opencart.factory.DriverFactory;
+
 public class ElementUtil {
-	public  WebDriver driver;
-	public  Actions act ;
+	public WebDriver driver;
+	public Actions act;
+	private JavaScriptUtil Jsutil;//null
+
 	// paramatrized constructor
 	public ElementUtil(WebDriver driver) {
 		this.driver = driver;
 		this.act = new Actions(driver);
+		Jsutil = new JavaScriptUtil(this.driver);
+	}
+/**
+ * It higlight the element
+ * @param locator
+ * @return
+ */
+	public WebElement getelement(By locator) {
+		WebElement ele = driver.findElement(locator);
+		// if (DriverFactory.highlight.equals("true"))
+		if (Boolean.parseBoolean(DriverFactory.highlight)) {
+			Jsutil.flash(ele);
+		}
+		return ele;
+		
 	}
 
 	/**
@@ -25,7 +44,7 @@ public class ElementUtil {
 	 * 
 	 * @param driver
 	 */
-	public  void quitthebrowser() {
+	public void quitthebrowser() {
 		hardcorewait(100);
 		driver.quit();
 		System.out.println("your browser is close..." + driver);
@@ -36,7 +55,7 @@ public class ElementUtil {
 	 * @param driver
 	 * @param url
 	 */
-	public  void luanchtheurl(String url) {
+	public void luanchtheurl(String url) {
 		System.out.println("your browser is launch...");
 		driver.get(url);
 	}
@@ -46,7 +65,7 @@ public class ElementUtil {
 	 * @param driver
 	 * @param url
 	 */
-	public  void luanchtheurlandverifyitstitle(WebDriver driver, String url, String expectedvalue) {
+	public void luanchtheurlandverifyitstitle(WebDriver driver, String url, String expectedvalue) {
 		System.out.println("your browser is launch...");
 		driver.get(url);
 		verifythetitleoftheprovidedpage(driver, expectedvalue);
@@ -59,7 +78,7 @@ public class ElementUtil {
 	 * @param driver
 	 * @param expectedvalue
 	 */
-	public  void verifythetitleoftheprovidedpage(WebDriver driver, String expectedvalue) {
+	public void verifythetitleoftheprovidedpage(WebDriver driver, String expectedvalue) {
 		if (title(driver).contains(expectedvalue)) {
 			System.out.println("title has been verified.....");
 		} else {
@@ -71,7 +90,7 @@ public class ElementUtil {
 	 * 
 	 * @param driver
 	 */
-	public  String title(WebDriver driver) {
+	public String title(WebDriver driver) {
 		System.out.println("your title is ..." + driver.getTitle());
 		return driver.getTitle();
 	}
@@ -413,7 +432,7 @@ public class ElementUtil {
 	 * @param userinput
 	 * @param title
 	 */
-	public  void gobackgoforward(WebDriver driver, String userinput, String title, String URL) {
+	public void gobackgoforward(WebDriver driver, String userinput, String title, String URL) {
 		if (userinput.contains("back") && "NA".contains(URL)) {
 			driver.navigate().back();
 			driver.navigate().refresh();
@@ -636,28 +655,31 @@ public class ElementUtil {
 
 	}
 
-		public  void domovetoelement(WebDriver driver, By locator) {
-			act.moveToElement(driver.findElement(locator)).perform();
-		}
-		public  void domovetoelement(WebDriver driver, By locator, By locator2) {
-			act.moveToElement(driver.findElement(locator)).moveToElement(driver.findElement(locator2)).build().perform();
-		}
-		
-		/**
-		 * 
-		 * @param locator
-		 * @param Enteryourstring
-		 */
-		public void sendkey(By locator, String Enteryourstring) {
-			driver.findElement(locator).sendKeys(Enteryourstring);
-		}
-		
-		public void click(By locator) {
-			driver.findElement(locator).click();
-		}
-		
-		public List<WebElement> getelements(By locator) {
-			return driver.findElements(locator);
-		}
+	public void domovetoelement(WebDriver driver, By locator) {
+		act.moveToElement(driver.findElement(locator)).perform();
+	}
+
+	public void domovetoelement(WebDriver driver, By locator, By locator2) {
+		act.moveToElement(driver.findElement(locator)).moveToElement(driver.findElement(locator2)).build().perform();
+	}
+
+	/**
+	 * 
+	 * @param locator
+	 * @param Enteryourstring
+	 */
+	public void sendkey(By locator, String Enteryourstring) {
+		getelement(locator);
+		driver.findElement(locator).clear();
+		driver.findElement(locator).sendKeys(Enteryourstring);
+	}
+
+	public void click(By locator) {
+		driver.findElement(locator).click();
+	}
+
+	public List<WebElement> getelements(By locator) {
+		return driver.findElements(locator);
+	}
 
 }

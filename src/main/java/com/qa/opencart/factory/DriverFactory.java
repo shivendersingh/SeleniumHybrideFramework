@@ -10,11 +10,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.qa.opencart.wbedriverfactory.WebDriverFactory;
-
 public class DriverFactory {
-	WebDriver driver;
+//	WebDriver driver;
 	Properties prop;
+	public static String highlight;
+	OptionsManager optionmanager;
+	public static ThreadLocal<WebDriver> tldriver = new ThreadLocal<WebDriver>();
+
 	/**
 	 * here we author provide to intitate the wedriver
 	 * 
@@ -22,28 +24,40 @@ public class DriverFactory {
 	 * @return driver
 	 */
 	public WebDriver init_driver(Properties prop) {
-		
-		String browsername= prop.getProperty("browsername");  
+
+		String browsername = prop.getProperty("browsername");
 		System.out.println("browser name is: " + browsername);
-		driver = WebDriverFactory.getDriver();
-		
+		highlight = prop.getProperty("highlight").trim();
+		optionmanager = new OptionsManager(prop);
 		if (browsername.equalsIgnoreCase("chrome")) {
-			driver = WebDriverFactory.getDriver();
-			driver = new ChromeDriver();
+			// driver = new ChromeDriver(optionmanager.getChromeOptions());
+			tldriver.set(new ChromeDriver(optionmanager.getChromeOptions()));
 		} else if (browsername.equalsIgnoreCase("firefox")) {
-			driver = new FirefoxDriver();
+			// driver = new FirefoxDriver(optionmanager.getfirefoxOptions());
+			tldriver.set(new FirefoxDriver(optionmanager.getfirefoxOptions()));
 		} else if (browsername.equalsIgnoreCase("edge")) {
-			driver = new EdgeDriver();
+			// driver = new EdgeDriver();
+			tldriver.set(new EdgeDriver());
+
 		} else {
 			System.out.println("browser is not found...please pass the correct browser name" + browsername);
 		}
-		driver.manage().deleteAllCookies();
+		getDriver().manage().deleteAllCookies();
 
-		driver.get(prop.getProperty("url"));
-		//driver.manage().window().setSize(new Dimension(1532, 813));
-		 driver.manage().window().fullscreen();
+		getDriver().get(prop.getProperty("url"));
+		// driver.manage().window().setSize(new Dimension(1532, 813));
+		getDriver().manage().window().fullscreen();
 
-		return driver;
+		return getDriver();
+	}
+
+	/**
+	 * It get all the thread local action of a driver
+	 * 
+	 * @return
+	 */
+	public static synchronized WebDriver getDriver() {
+		return tldriver.get();
 	}
 
 	/**
@@ -55,14 +69,45 @@ public class DriverFactory {
 	public Properties init_prop() {
 
 		prop = new Properties();
+		FileInputStream ip = null;
+		String env = System.getProperty("env");
+		if (env == null) {
+			try {
+				ip = new FileInputStream("./src/test/resources/config/config.properties");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+
+		} else {
+
+			try {
+				switch (env) {
+				case "qa":
+					ip = new FileInputStream("./src/test/resources/config/qaconfig.properties");
+					break;
+				case "dev":
+					ip = new FileInputStream("./src/test/resources/config/devconfig.properties");
+					break;
+				case "staging":
+					ip = new FileInputStream("./src/test/resources/config/stagingconfig.properties");
+					break;
+
+				default:
+					System.out.println("please provide the right env......");
+					break;
+				}
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+
+		}
 		try {
-			FileInputStream ip = new FileInputStream("./src/test/resources/config/config.properties");
 			prop.load(ip);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 
 		return prop;
 

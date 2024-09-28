@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeTest;
 
 import com.qa.opencart.factory.DriverFactory;
 import com.qa.opencart.pages.AccountPage;
+import com.qa.opencart.pages.AccountRegistration;
 import com.qa.opencart.pages.LoginPage;
 import com.qa.opencart.pages.SearchResultPage;
 import com.qa.opencart.pages.productInfoPage;
@@ -21,6 +22,7 @@ public class BaseTest {
 	public AccountPage accpage;
 	public SearchResultPage searchResultpage;
 	public productInfoPage productInfoPage;
+	public AccountRegistration AccpuntRegistrationPage;
 	
 	
 	@BeforeTest
@@ -30,6 +32,7 @@ public class BaseTest {
 		driver = df.init_driver(prop);
 		loginpage = new LoginPage(driver);
 	}
+	
 	@AfterTest
 	public void tearDown() {
 		driver.quit();

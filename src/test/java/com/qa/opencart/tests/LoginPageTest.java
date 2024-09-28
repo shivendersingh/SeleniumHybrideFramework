@@ -15,6 +15,7 @@ public class LoginPageTest extends BaseTest {
 
 	}
 	
+	
     @Test(priority = 2)
 	public void forgotpwdlinktest() {
 		Assert.assertTrue(loginpage.isforgotpwdLinkexist());
