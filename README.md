@@ -53,8 +53,8 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 
 	</build>
 ##Command to run the suite through maven
->>mvn clean install
->>mvn clean install -Denv="<provide your desire environment>"
+- mvn clean install
+- mvn clean install -Denv="<provide your desire environment>"
 
 ## Getting Started
 
