@@ -16,25 +16,74 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 - ** Infrastructure Setup
 ## **Report(Allure)**
 ![Allure Report](assets/images/AllureReportImage.png)
+- Add 'Framework Dependency' and 'Maven Surefire Plugin' Information to the POM File as below-
+```xml
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-testng</artifactId>
+			<version>2.13.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+```
+```xml
+<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M7</version>
+
+				<configuration>
+					<forkCount>3</forkCount>
+					<reuseForks>true</reuseForks>
+					<argLine>-Xmx1024m</argLine>
+					<suiteXmlFiles>
+						<suiteXmlFile>
+							src/test/resources/testrunners/testng_regression.xml</suiteXmlFile>
+						<!-- <suiteXmlFile>${suiteXmlFile}</suiteXmlFile> -->
+					</suiteXmlFiles>
+
+					<argLine>
+						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+					</argLine>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjweaver</artifactId>
+						<version>${aspectj.version}</version>
+					</dependency>
+				</dependencies>
+
+			</plugin>
+
+		</plugins>
+```
+
 ## **Report(Extent)**
 ![Extent Report](assets/images/extent_report.png)
-
+- Add 'Framework Dependency' and 'Maven Surefire Plugin' Information to the POM File as below-
 ```xml
-			<dependency>
+		<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
 			<version>5.1.2</version>
-			</dependency>
+		</dependency>
 ```
-**Adding listeners in runner 
-```xml
-
-	<listeners>
-		<listener
-			class-name="com.qa.opencart.listerns.ExtentReportListener" />
-	</listeners>
-```
-- **Surefire Plugin capabilities enable for regression suite run on different "env" bases
 ```xml
 <build>
 		<plugins>
@@ -71,6 +120,14 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 
 
 	</build>
+```
+- 'Adding listeners in runner' 
+```xml
+
+	<listeners>
+		<listener
+			class-name="com.qa.opencart.listerns.ExtentReportListener" />
+	</listeners>
 ```
 ##Command to run the suite through maven
 - mvn clean install
