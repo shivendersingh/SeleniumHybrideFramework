@@ -35,6 +35,9 @@ allure --version
 allure generate allure-results --clean
 ```
 - ## **To serve the report locally (this starts a local server):**
+```xml
+allure serve allure-results
+```
 
 - Add 'Framework Dependency' and 'Maven Surefire Plugin' Information to the POM File as below-
 ```xml
