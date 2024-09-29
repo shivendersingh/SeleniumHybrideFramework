@@ -1,4 +1,4 @@
-![](assets/images/TestAutomationTiTans.png)
+![](assets/images/TT.png)
 ## Overview
 
 This repository contains a Page Object Model (POM) framework for SeleniumHybrideFramework, designed to streamline automated testing for web applications. The POM design pattern enhances test maintenance and improves readability by separating test logic from page-specific actions.
