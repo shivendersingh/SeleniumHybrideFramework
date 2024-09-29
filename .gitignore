@@ -1,4 +1,7 @@
 /target/
 /screenshots/
 /reports/
-
+/allure-report/
+/allure-results/
+/target/
+test-output/

@@ -17,7 +17,6 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.qa.opencart.factory.DriverFactory;
 
-
 public class ExtentReportListener extends DriverFactory implements ITestListener {
 
 	private static final String OUTPUT_FOLDER = "./reports/";
@@ -26,7 +25,6 @@ public class ExtentReportListener extends DriverFactory implements ITestListener
 	private static ExtentReports extent = init();
 	public static ThreadLocal<ExtentTest> test = new ThreadLocal<ExtentTest>();
 	private static ExtentReports extentReports;
-	
 
 	private static ExtentReports init() {
 
@@ -40,13 +38,13 @@ public class ExtentReportListener extends DriverFactory implements ITestListener
 				e.printStackTrace();
 			}
 		}
-		
+
 		extentReports = new ExtentReports();
 		ExtentSparkReporter reporter = new ExtentSparkReporter(OUTPUT_FOLDER + FILE_NAME);
 		reporter.config().setReportName("Open Cart Automation Test Results");
 		extentReports.attachReporter(reporter);
-		extentReports.setSystemInfo("System", "Windows");
-		extentReports.setSystemInfo("Author", "Sept2024POMSeries");
+		extentReports.setSystemInfo("System", "Window");
+		extentReports.setSystemInfo("Author", "Sept2024POMseries");
 		extentReports.setSystemInfo("Build#", "1.1");
 		extentReports.setSystemInfo("Team", "OpenCart QA Team");
 		extentReports.setSystemInfo("Customer Name", "NAL");
@@ -58,7 +56,7 @@ public class ExtentReportListener extends DriverFactory implements ITestListener
 	@Override
 	public synchronized void onStart(ITestContext context) {
 		System.out.println("Test Suite started!");
-		
+
 	}
 
 	@Override
@@ -94,13 +92,15 @@ public class ExtentReportListener extends DriverFactory implements ITestListener
 		String methodName = result.getMethod().getMethodName();
 		System.out.println((methodName + " passed!"));
 		test.get().pass("Test passed");
-		//test.get().pass(result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(DriverFactory.getScreenshot(methodName), methodName).build());
+		// test.get().pass(result.getThrowable(),
+		// MediaEntityBuilder.createScreenCaptureFromPath(DriverFactory.getScreenshot(methodName),
+		// methodName).build());
 		test.get().getModel().setEndTime(getTime(result.getEndMillis()));
 	}
 
 	public synchronized void onTestFailure(ITestResult result) {
 		System.out.println((result.getMethod().getMethodName() + " failed!"));
-		//String methodName = result.getMethod().getMethodName();
+		// String methodName = result.getMethod().getMethodName();
 		test.get().fail("Test failed");
 		test.get().fail(result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot()).build());
 		test.get().getModel().setEndTime(getTime(result.getEndMillis()));
@@ -108,8 +108,8 @@ public class ExtentReportListener extends DriverFactory implements ITestListener
 
 	public synchronized void onTestSkipped(ITestResult result) {
 		System.out.println((result.getMethod().getMethodName() + " skipped!"));
-		//String methodName = result.getMethod().getMethodName();
-		
+		// String methodName = result.getMethod().getMethodName();
+
 		test.get().skip("Test skipped");
 
 		test.get().skip(result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot()).build());

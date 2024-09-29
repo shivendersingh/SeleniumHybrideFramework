@@ -115,18 +115,17 @@ public class DriverFactory {
 		return prop;
 
 	}
-	
+
 	/**
-	 * @author shive
-	 * This method capture the screenshot
+	 * This method create the screenshot and return the path of the location where
+	   it does store
+	 * 
+	 * @return
 	 */
 	public String getScreenshot() {
-		File src=((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
-		//File srcFile= new File(src);
-		
-		String path = System.getProperty("user.dir")+"/screenshots/"+System.currentTimeMillis()+
-				".png";
-		File destination =new File(path);
+		File src = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+		String path = System.getProperty("user.dir") + "/screenshots/" + System.currentTimeMillis() + ".png";
+		File destination = new File(path);
 		try {
 			FileUtils.copyFile(src, destination);
 		} catch (IOException e) {
