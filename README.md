@@ -14,14 +14,16 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 - ** Data Driven
 - ** GeneicUtils(ElementUtils,ExcelUtils,Cnstants,ErrorUtils)
 - ** Report(Extent)
+```xml
 			<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
 			<version>5.1.2</version>
 			</dependency>
+```
 - ** Infrastructure Setup
 - **Surefire Plugin capabilities enable for regression suite run on different "env" bases
-
+```xml
 <build>
 		<plugins>
 			<plugin>
@@ -57,6 +59,7 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 
 
 	</build>
+```
 ##Command to run the suite through maven
 - mvn clean install
 - mvn clean install -Denv="<provide your desire environment>"
