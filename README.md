@@ -16,7 +16,7 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 - ** Infrastructure Setup
 ## **Report(Allure)**
 ![Allure Report](assets/images/AllureReportImage.png)
-- 'Infrastructure setup for allure report'
+- ## **'Infrastructure setup for allure report'**
 
 -Make sure Scoop is installed [ See the installation instructions on GitHub.](https://github.com/ScoopInstaller/Install#readme)
 
@@ -30,6 +30,12 @@ scoop install allure
 ```xml
 allure --version
 ```
+- ## **To generate the Report**
+```xml
+allure generate allure-results --clean
+```
+- ## **To serve the report locally (this starts a local server):**
+
 - Add 'Framework Dependency' and 'Maven Surefire Plugin' Information to the POM File as below-
 ```xml
 		<dependency>
