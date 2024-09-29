@@ -13,6 +13,7 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 - **Cross-Browser Testing**: Capable of running tests across multiple browsers with minimal configuration.
 - ** Data Driven
 - ** GeneicUtils(ElementUtils,ExcelUtils,Cnstants,ErrorUtils)
+- ** Infrastructure Setup
 - ** Report(Extent)
 ```xml
 			<dependency>
@@ -21,7 +22,14 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 			<version>5.1.2</version>
 			</dependency>
 ```
-- ** Infrastructure Setup
+**Adding listeners in runner 
+```xml
+
+	<listeners>
+		<listener
+			class-name="com.qa.opencart.listerns.ExtentReportListener" />
+	</listeners>
+```
 - **Surefire Plugin capabilities enable for regression suite run on different "env" bases
 ```xml
 <build>
