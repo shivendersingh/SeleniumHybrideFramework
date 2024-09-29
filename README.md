@@ -14,7 +14,9 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 - ** Data Driven
 - ** GeneicUtils(ElementUtils,ExcelUtils,Cnstants,ErrorUtils)
 - ** Infrastructure Setup
-- ** Report(Extent)
+## **Report(Allure)**
+![Allure Report](assets/images/AllureReportImage.png)
+## **Report(Extent)**
 ![Extent Report](assets/images/extent_report.png)
 
 ```xml
