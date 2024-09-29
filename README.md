@@ -11,10 +11,15 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 - **Readability**: Test scripts are clear and easy to understand, focusing on test logic rather than UI interactions.
 - **Data-Driven Testing**: Supports integration with data sources for parameterized tests.
 - **Cross-Browser Testing**: Capable of running tests across multiple browsers with minimal configuration.
-- ** DataDriven
-- ** GeneicUtils
-- ** Report(Allure,Extent)
-- ** Infrastrcture Setup
+- ** Data Driven
+- ** GeneicUtils(ElementUtils,ExcelUtils,Cnstants,ErrorUtils)
+- ** Report(Extent)
+			<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>5.1.2</version>
+			</dependency>
+- ** Infrastructure Setup
 - **Surefire Plugin capabilities enable for regression suite run on different "env" bases
 
 <build>
