@@ -15,6 +15,8 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 - ** GeneicUtils(ElementUtils,ExcelUtils,Cnstants,ErrorUtils)
 - ** Infrastructure Setup
 - ** Report(Extent)
+![Extent Report](assets/images/extent_report.png)
+
 ```xml
 			<dependency>
 			<groupId>com.aventstack</groupId>
