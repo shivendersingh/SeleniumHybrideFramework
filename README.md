@@ -17,6 +17,7 @@ This repository contains a Page Object Model (POM) framework for SeleniumHybride
 ## **Report(Allure)**
 ![Allure Report](assets/images/AllureReportImage.png)
 -'Infrastructure setup for allure report'
+
 -Make sure Scoop is installed [ See the installation instructions on GitHub.](https://github.com/ScoopInstaller/Install#readme)
 
 -Make sure Java version 8 or above installed, and its directory is specified in the JAVA_HOME environment variable.
