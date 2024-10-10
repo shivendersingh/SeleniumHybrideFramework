@@ -13,9 +13,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public class DriverFactory {
-//	WebDriver driver;
+	protected WebDriver driver;
 	Properties prop;
 	public static String highlight;
 	OptionsManager optionmanager;
@@ -27,6 +28,11 @@ public class DriverFactory {
 	 * @param browsername
 	 * @return driver
 	 */
+	public DriverFactory() {
+		
+		driver = new ChromeDriver();
+		PageFactory.initElements(driver, this);
+	}
 	public WebDriver init_driver(Properties prop) {
 
 		String browsername = prop.getProperty("browsername");
